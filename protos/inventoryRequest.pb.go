@@ -22,16 +22,15 @@ const (
 )
 
 type InventoryRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Coids           []string               `protobuf:"bytes,1,rep,name=coids,proto3" json:"coids,omitempty"`
-	CustomerList    []*CustomerListValue   `protobuf:"bytes,2,rep,name=customerList,proto3" json:"customerList,omitempty"`
-	InvoiceDateMin  *Date                  `protobuf:"bytes,3,opt,name=invoiceDateMin,proto3,oneof" json:"invoiceDateMin,omitempty"`
-	InvoiceDateMax  *Date                  `protobuf:"bytes,4,opt,name=invoiceDateMax,proto3,oneof" json:"invoiceDateMax,omitempty"`
-	FiscalPeriodMin *Date                  `protobuf:"bytes,5,opt,name=FiscalPeriodMin,proto3" json:"FiscalPeriodMin,omitempty"`
-	FixcalPeriodMax *Date                  `protobuf:"bytes,6,opt,name=FixcalPeriodMax,proto3" json:"FixcalPeriodMax,omitempty"`
-	DisplayCurrency string                 `protobuf:"bytes,7,opt,name=displayCurrency,proto3" json:"displayCurrency,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Coids            []string               `protobuf:"bytes,1,rep,name=coids,proto3" json:"coids,omitempty"`
+	Warehouses       []*WarehouseListValue  `protobuf:"bytes,2,rep,name=warehouses,proto3" json:"warehouses,omitempty"`
+	ReceivedDateMin  *Date                  `protobuf:"bytes,3,opt,name=receivedDateMin,proto3,oneof" json:"receivedDateMin,omitempty"`
+	ReceivedDateMax  *Date                  `protobuf:"bytes,4,opt,name=receivedDateMax,proto3,oneof" json:"receivedDateMax,omitempty"`
+	DisplayCurrency  string                 `protobuf:"bytes,7,opt,name=displayCurrency,proto3" json:"displayCurrency,omitempty"`
+	DisplayWeightUOM string                 `protobuf:"bytes,8,opt,name=displayWeightUOM,proto3" json:"displayWeightUOM,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *InventoryRequest) Reset() {
@@ -71,37 +70,23 @@ func (x *InventoryRequest) GetCoids() []string {
 	return nil
 }
 
-func (x *InventoryRequest) GetCustomerList() []*CustomerListValue {
+func (x *InventoryRequest) GetWarehouses() []*WarehouseListValue {
 	if x != nil {
-		return x.CustomerList
+		return x.Warehouses
 	}
 	return nil
 }
 
-func (x *InventoryRequest) GetInvoiceDateMin() *Date {
+func (x *InventoryRequest) GetReceivedDateMin() *Date {
 	if x != nil {
-		return x.InvoiceDateMin
+		return x.ReceivedDateMin
 	}
 	return nil
 }
 
-func (x *InventoryRequest) GetInvoiceDateMax() *Date {
+func (x *InventoryRequest) GetReceivedDateMax() *Date {
 	if x != nil {
-		return x.InvoiceDateMax
-	}
-	return nil
-}
-
-func (x *InventoryRequest) GetFiscalPeriodMin() *Date {
-	if x != nil {
-		return x.FiscalPeriodMin
-	}
-	return nil
-}
-
-func (x *InventoryRequest) GetFixcalPeriodMax() *Date {
-	if x != nil {
-		return x.FixcalPeriodMax
+		return x.ReceivedDateMax
 	}
 	return nil
 }
@@ -113,28 +98,35 @@ func (x *InventoryRequest) GetDisplayCurrency() string {
 	return ""
 }
 
-type CustomerListValue struct {
+func (x *InventoryRequest) GetDisplayWeightUOM() string {
+	if x != nil {
+		return x.DisplayWeightUOM
+	}
+	return ""
+}
+
+type WarehouseListValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Coid          string                 `protobuf:"bytes,1,opt,name=coid,proto3" json:"coid,omitempty"`
-	CustomerId    int32                  `protobuf:"varint,2,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	WarehouseId   int32                  `protobuf:"varint,2,opt,name=warehouseId,proto3" json:"warehouseId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CustomerListValue) Reset() {
-	*x = CustomerListValue{}
+func (x *WarehouseListValue) Reset() {
+	*x = WarehouseListValue{}
 	mi := &file_inventoryRequest_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CustomerListValue) String() string {
+func (x *WarehouseListValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CustomerListValue) ProtoMessage() {}
+func (*WarehouseListValue) ProtoMessage() {}
 
-func (x *CustomerListValue) ProtoReflect() protoreflect.Message {
+func (x *WarehouseListValue) ProtoReflect() protoreflect.Message {
 	mi := &file_inventoryRequest_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -146,21 +138,21 @@ func (x *CustomerListValue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CustomerListValue.ProtoReflect.Descriptor instead.
-func (*CustomerListValue) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseListValue.ProtoReflect.Descriptor instead.
+func (*WarehouseListValue) Descriptor() ([]byte, []int) {
 	return file_inventoryRequest_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CustomerListValue) GetCoid() string {
+func (x *WarehouseListValue) GetCoid() string {
 	if x != nil {
 		return x.Coid
 	}
 	return ""
 }
 
-func (x *CustomerListValue) GetCustomerId() int32 {
+func (x *WarehouseListValue) GetWarehouseId() int32 {
 	if x != nil {
-		return x.CustomerId
+		return x.WarehouseId
 	}
 	return 0
 }
@@ -1705,22 +1697,21 @@ var File_inventoryRequest_proto protoreflect.FileDescriptor
 
 const file_inventoryRequest_proto_rawDesc = "" +
 	"\n" +
-	"\x16inventoryRequest.proto\x12\tinventory\"\xac\x03\n" +
+	"\x16inventoryRequest.proto\x12\tinventory\"\xe5\x02\n" +
 	"\x10InventoryRequest\x12\x14\n" +
-	"\x05coids\x18\x01 \x03(\tR\x05coids\x12@\n" +
-	"\fcustomerList\x18\x02 \x03(\v2\x1c.inventory.CustomerListValueR\fcustomerList\x12<\n" +
-	"\x0einvoiceDateMin\x18\x03 \x01(\v2\x0f.inventory.DateH\x00R\x0einvoiceDateMin\x88\x01\x01\x12<\n" +
-	"\x0einvoiceDateMax\x18\x04 \x01(\v2\x0f.inventory.DateH\x01R\x0einvoiceDateMax\x88\x01\x01\x129\n" +
-	"\x0fFiscalPeriodMin\x18\x05 \x01(\v2\x0f.inventory.DateR\x0fFiscalPeriodMin\x129\n" +
-	"\x0fFixcalPeriodMax\x18\x06 \x01(\v2\x0f.inventory.DateR\x0fFixcalPeriodMax\x12(\n" +
-	"\x0fdisplayCurrency\x18\a \x01(\tR\x0fdisplayCurrencyB\x11\n" +
-	"\x0f_invoiceDateMinB\x11\n" +
-	"\x0f_invoiceDateMax\"G\n" +
-	"\x11CustomerListValue\x12\x12\n" +
-	"\x04coid\x18\x01 \x01(\tR\x04coid\x12\x1e\n" +
+	"\x05coids\x18\x01 \x03(\tR\x05coids\x12=\n" +
 	"\n" +
-	"customerId\x18\x02 \x01(\x05R\n" +
-	"customerId\"A\n" +
+	"warehouses\x18\x02 \x03(\v2\x1d.inventory.WarehouseListValueR\n" +
+	"warehouses\x12>\n" +
+	"\x0freceivedDateMin\x18\x03 \x01(\v2\x0f.inventory.DateH\x00R\x0freceivedDateMin\x88\x01\x01\x12>\n" +
+	"\x0freceivedDateMax\x18\x04 \x01(\v2\x0f.inventory.DateH\x01R\x0freceivedDateMax\x88\x01\x01\x12(\n" +
+	"\x0fdisplayCurrency\x18\a \x01(\tR\x0fdisplayCurrency\x12*\n" +
+	"\x10displayWeightUOM\x18\b \x01(\tR\x10displayWeightUOMB\x12\n" +
+	"\x10_receivedDateMinB\x12\n" +
+	"\x10_receivedDateMax\"J\n" +
+	"\x12WarehouseListValue\x12\x12\n" +
+	"\x04coid\x18\x01 \x01(\tR\x04coid\x12 \n" +
+	"\vwarehouseId\x18\x02 \x01(\x05R\vwarehouseId\"A\n" +
 	"\x0fInventoryResult\x12.\n" +
 	"\x05items\x18\x01 \x03(\v2\x18.inventory.InventoryItemR\x05items\"B\n" +
 	"\x04Date\x12\x12\n" +
@@ -2114,120 +2105,118 @@ func file_inventoryRequest_proto_rawDescGZIP() []byte {
 
 var file_inventoryRequest_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_inventoryRequest_proto_goTypes = []any{
-	(*InventoryRequest)(nil),  // 0: inventory.InventoryRequest
-	(*CustomerListValue)(nil), // 1: inventory.CustomerListValue
-	(*InventoryResult)(nil),   // 2: inventory.InventoryResult
-	(*Date)(nil),              // 3: inventory.Date
-	(*DecimalValue)(nil),      // 4: inventory.DecimalValue
-	(*InventoryItem)(nil),     // 5: inventory.InventoryItem
+	(*InventoryRequest)(nil),   // 0: inventory.InventoryRequest
+	(*WarehouseListValue)(nil), // 1: inventory.WarehouseListValue
+	(*InventoryResult)(nil),    // 2: inventory.InventoryResult
+	(*Date)(nil),               // 3: inventory.Date
+	(*DecimalValue)(nil),       // 4: inventory.DecimalValue
+	(*InventoryItem)(nil),      // 5: inventory.InventoryItem
 }
 var file_inventoryRequest_proto_depIdxs = []int32{
-	1,   // 0: inventory.InventoryRequest.customerList:type_name -> inventory.CustomerListValue
-	3,   // 1: inventory.InventoryRequest.invoiceDateMin:type_name -> inventory.Date
-	3,   // 2: inventory.InventoryRequest.invoiceDateMax:type_name -> inventory.Date
-	3,   // 3: inventory.InventoryRequest.FiscalPeriodMin:type_name -> inventory.Date
-	3,   // 4: inventory.InventoryRequest.FixcalPeriodMax:type_name -> inventory.Date
-	5,   // 5: inventory.InventoryResult.items:type_name -> inventory.InventoryItem
-	4,   // 6: inventory.InventoryItem.outside_diameter:type_name -> inventory.DecimalValue
-	4,   // 7: inventory.InventoryItem.inside_diameter:type_name -> inventory.DecimalValue
-	4,   // 8: inventory.InventoryItem.theo_wgt:type_name -> inventory.DecimalValue
-	4,   // 9: inventory.InventoryItem.theo_wgt_per_foot:type_name -> inventory.DecimalValue
-	3,   // 10: inventory.InventoryItem.stk_hold_date:type_name -> inventory.Date
-	4,   // 11: inventory.InventoryItem.created_ref_item:type_name -> inventory.DecimalValue
-	4,   // 12: inventory.InventoryItem.length:type_name -> inventory.DecimalValue
-	4,   // 13: inventory.InventoryItem.length_oh:type_name -> inventory.DecimalValue
-	4,   // 14: inventory.InventoryItem.length_alloc:type_name -> inventory.DecimalValue
-	4,   // 15: inventory.InventoryItem.length_avl:type_name -> inventory.DecimalValue
-	4,   // 16: inventory.InventoryItem.wgt_oh_base:type_name -> inventory.DecimalValue
-	4,   // 17: inventory.InventoryItem.wgt_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 18: inventory.InventoryItem.wgt_avl_base:type_name -> inventory.DecimalValue
-	4,   // 19: inventory.InventoryItem.wgt_oh_display:type_name -> inventory.DecimalValue
-	4,   // 20: inventory.InventoryItem.wgt_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 21: inventory.InventoryItem.wgt_avl_display:type_name -> inventory.DecimalValue
-	4,   // 22: inventory.InventoryItem.qty_oh:type_name -> inventory.DecimalValue
-	4,   // 23: inventory.InventoryItem.qty_alloc:type_name -> inventory.DecimalValue
-	4,   // 24: inventory.InventoryItem.qty_avl:type_name -> inventory.DecimalValue
-	4,   // 25: inventory.InventoryItem.unit_value_base:type_name -> inventory.DecimalValue
-	4,   // 26: inventory.InventoryItem.unit_value_display:type_name -> inventory.DecimalValue
-	4,   // 27: inventory.InventoryItem.orig_matl_cost_base:type_name -> inventory.DecimalValue
-	4,   // 28: inventory.InventoryItem.orig_prdn_cost_base:type_name -> inventory.DecimalValue
-	4,   // 29: inventory.InventoryItem.orig_frgt_cost_base:type_name -> inventory.DecimalValue
-	4,   // 30: inventory.InventoryItem.orig_misc_cost_base:type_name -> inventory.DecimalValue
-	4,   // 31: inventory.InventoryItem.orig_surch_cost_base:type_name -> inventory.DecimalValue
-	4,   // 32: inventory.InventoryItem.orig_total_cost_oh_base:type_name -> inventory.DecimalValue
-	4,   // 33: inventory.InventoryItem.orig_matl_cost_display:type_name -> inventory.DecimalValue
-	4,   // 34: inventory.InventoryItem.orig_prdn_cost_display:type_name -> inventory.DecimalValue
-	4,   // 35: inventory.InventoryItem.orig_frgt_cost_display:type_name -> inventory.DecimalValue
-	4,   // 36: inventory.InventoryItem.orig_misc_cost_display:type_name -> inventory.DecimalValue
-	4,   // 37: inventory.InventoryItem.orig_surch_cost_display:type_name -> inventory.DecimalValue
-	4,   // 38: inventory.InventoryItem.orig_total_cost_display:type_name -> inventory.DecimalValue
-	4,   // 39: inventory.InventoryItem.matl_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 40: inventory.InventoryItem.prdn_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 41: inventory.InventoryItem.trans_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 42: inventory.InventoryItem.misc_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 43: inventory.InventoryItem.surch_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 44: inventory.InventoryItem.total_cost_per_wgt_base:type_name -> inventory.DecimalValue
-	4,   // 45: inventory.InventoryItem.matl_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 46: inventory.InventoryItem.prdn_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 47: inventory.InventoryItem.trans_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 48: inventory.InventoryItem.misc_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 49: inventory.InventoryItem.surch_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 50: inventory.InventoryItem.total_cost_per_wgt_display:type_name -> inventory.DecimalValue
-	4,   // 51: inventory.InventoryItem.matl_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 52: inventory.InventoryItem.trans_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 53: inventory.InventoryItem.prdn_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 54: inventory.InventoryItem.misc_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 55: inventory.InventoryItem.surch_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 56: inventory.InventoryItem.total_value_oh_base:type_name -> inventory.DecimalValue
-	4,   // 57: inventory.InventoryItem.matl_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 58: inventory.InventoryItem.trans_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 59: inventory.InventoryItem.prdn_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 60: inventory.InventoryItem.misc_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 61: inventory.InventoryItem.surch_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 62: inventory.InventoryItem.total_value_oh_display:type_name -> inventory.DecimalValue
-	4,   // 63: inventory.InventoryItem.matl_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 64: inventory.InventoryItem.trans_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 65: inventory.InventoryItem.prdn_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 66: inventory.InventoryItem.misc_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 67: inventory.InventoryItem.surch_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 68: inventory.InventoryItem.total_value_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 69: inventory.InventoryItem.matl_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 70: inventory.InventoryItem.trans_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 71: inventory.InventoryItem.prdn_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 72: inventory.InventoryItem.misc_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 73: inventory.InventoryItem.surch_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 74: inventory.InventoryItem.total_value_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 75: inventory.InventoryItem.matl_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 76: inventory.InventoryItem.trans_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 77: inventory.InventoryItem.prdn_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 78: inventory.InventoryItem.misc_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 79: inventory.InventoryItem.surch_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 80: inventory.InventoryItem.total_value_avl_base:type_name -> inventory.DecimalValue
-	4,   // 81: inventory.InventoryItem.matl_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 82: inventory.InventoryItem.trans_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 83: inventory.InventoryItem.prdn_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 84: inventory.InventoryItem.misc_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 85: inventory.InventoryItem.surch_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 86: inventory.InventoryItem.total_value_avl_display:type_name -> inventory.DecimalValue
-	4,   // 87: inventory.InventoryItem.po_pcs_balance:type_name -> inventory.DecimalValue
-	4,   // 88: inventory.InventoryItem.po_qty_ordered:type_name -> inventory.DecimalValue
-	4,   // 89: inventory.InventoryItem.po_qty_allocated:type_name -> inventory.DecimalValue
-	4,   // 90: inventory.InventoryItem.po_qty_delivered:type_name -> inventory.DecimalValue
-	4,   // 91: inventory.InventoryItem.po_qty_balance:type_name -> inventory.DecimalValue
-	4,   // 92: inventory.InventoryItem.po_wgt_ordered_base:type_name -> inventory.DecimalValue
-	4,   // 93: inventory.InventoryItem.po_wgt_ordered_display:type_name -> inventory.DecimalValue
-	4,   // 94: inventory.InventoryItem.po_wgt_alloc_base:type_name -> inventory.DecimalValue
-	4,   // 95: inventory.InventoryItem.po_wgt_alloc_display:type_name -> inventory.DecimalValue
-	4,   // 96: inventory.InventoryItem.po_wgt_delivered_base:type_name -> inventory.DecimalValue
-	4,   // 97: inventory.InventoryItem.po_wgt_delivered_display:type_name -> inventory.DecimalValue
-	4,   // 98: inventory.InventoryItem.po_wgt_balance_base:type_name -> inventory.DecimalValue
-	0,   // 99: inventory.InventoryService.GetInventory:input_type -> inventory.InventoryRequest
-	2,   // 100: inventory.InventoryService.GetInventory:output_type -> inventory.InventoryResult
-	100, // [100:101] is the sub-list for method output_type
-	99,  // [99:100] is the sub-list for method input_type
-	99,  // [99:99] is the sub-list for extension type_name
-	99,  // [99:99] is the sub-list for extension extendee
-	0,   // [0:99] is the sub-list for field type_name
+	1,  // 0: inventory.InventoryRequest.warehouses:type_name -> inventory.WarehouseListValue
+	3,  // 1: inventory.InventoryRequest.receivedDateMin:type_name -> inventory.Date
+	3,  // 2: inventory.InventoryRequest.receivedDateMax:type_name -> inventory.Date
+	5,  // 3: inventory.InventoryResult.items:type_name -> inventory.InventoryItem
+	4,  // 4: inventory.InventoryItem.outside_diameter:type_name -> inventory.DecimalValue
+	4,  // 5: inventory.InventoryItem.inside_diameter:type_name -> inventory.DecimalValue
+	4,  // 6: inventory.InventoryItem.theo_wgt:type_name -> inventory.DecimalValue
+	4,  // 7: inventory.InventoryItem.theo_wgt_per_foot:type_name -> inventory.DecimalValue
+	3,  // 8: inventory.InventoryItem.stk_hold_date:type_name -> inventory.Date
+	4,  // 9: inventory.InventoryItem.created_ref_item:type_name -> inventory.DecimalValue
+	4,  // 10: inventory.InventoryItem.length:type_name -> inventory.DecimalValue
+	4,  // 11: inventory.InventoryItem.length_oh:type_name -> inventory.DecimalValue
+	4,  // 12: inventory.InventoryItem.length_alloc:type_name -> inventory.DecimalValue
+	4,  // 13: inventory.InventoryItem.length_avl:type_name -> inventory.DecimalValue
+	4,  // 14: inventory.InventoryItem.wgt_oh_base:type_name -> inventory.DecimalValue
+	4,  // 15: inventory.InventoryItem.wgt_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 16: inventory.InventoryItem.wgt_avl_base:type_name -> inventory.DecimalValue
+	4,  // 17: inventory.InventoryItem.wgt_oh_display:type_name -> inventory.DecimalValue
+	4,  // 18: inventory.InventoryItem.wgt_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 19: inventory.InventoryItem.wgt_avl_display:type_name -> inventory.DecimalValue
+	4,  // 20: inventory.InventoryItem.qty_oh:type_name -> inventory.DecimalValue
+	4,  // 21: inventory.InventoryItem.qty_alloc:type_name -> inventory.DecimalValue
+	4,  // 22: inventory.InventoryItem.qty_avl:type_name -> inventory.DecimalValue
+	4,  // 23: inventory.InventoryItem.unit_value_base:type_name -> inventory.DecimalValue
+	4,  // 24: inventory.InventoryItem.unit_value_display:type_name -> inventory.DecimalValue
+	4,  // 25: inventory.InventoryItem.orig_matl_cost_base:type_name -> inventory.DecimalValue
+	4,  // 26: inventory.InventoryItem.orig_prdn_cost_base:type_name -> inventory.DecimalValue
+	4,  // 27: inventory.InventoryItem.orig_frgt_cost_base:type_name -> inventory.DecimalValue
+	4,  // 28: inventory.InventoryItem.orig_misc_cost_base:type_name -> inventory.DecimalValue
+	4,  // 29: inventory.InventoryItem.orig_surch_cost_base:type_name -> inventory.DecimalValue
+	4,  // 30: inventory.InventoryItem.orig_total_cost_oh_base:type_name -> inventory.DecimalValue
+	4,  // 31: inventory.InventoryItem.orig_matl_cost_display:type_name -> inventory.DecimalValue
+	4,  // 32: inventory.InventoryItem.orig_prdn_cost_display:type_name -> inventory.DecimalValue
+	4,  // 33: inventory.InventoryItem.orig_frgt_cost_display:type_name -> inventory.DecimalValue
+	4,  // 34: inventory.InventoryItem.orig_misc_cost_display:type_name -> inventory.DecimalValue
+	4,  // 35: inventory.InventoryItem.orig_surch_cost_display:type_name -> inventory.DecimalValue
+	4,  // 36: inventory.InventoryItem.orig_total_cost_display:type_name -> inventory.DecimalValue
+	4,  // 37: inventory.InventoryItem.matl_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 38: inventory.InventoryItem.prdn_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 39: inventory.InventoryItem.trans_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 40: inventory.InventoryItem.misc_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 41: inventory.InventoryItem.surch_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 42: inventory.InventoryItem.total_cost_per_wgt_base:type_name -> inventory.DecimalValue
+	4,  // 43: inventory.InventoryItem.matl_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 44: inventory.InventoryItem.prdn_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 45: inventory.InventoryItem.trans_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 46: inventory.InventoryItem.misc_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 47: inventory.InventoryItem.surch_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 48: inventory.InventoryItem.total_cost_per_wgt_display:type_name -> inventory.DecimalValue
+	4,  // 49: inventory.InventoryItem.matl_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 50: inventory.InventoryItem.trans_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 51: inventory.InventoryItem.prdn_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 52: inventory.InventoryItem.misc_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 53: inventory.InventoryItem.surch_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 54: inventory.InventoryItem.total_value_oh_base:type_name -> inventory.DecimalValue
+	4,  // 55: inventory.InventoryItem.matl_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 56: inventory.InventoryItem.trans_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 57: inventory.InventoryItem.prdn_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 58: inventory.InventoryItem.misc_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 59: inventory.InventoryItem.surch_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 60: inventory.InventoryItem.total_value_oh_display:type_name -> inventory.DecimalValue
+	4,  // 61: inventory.InventoryItem.matl_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 62: inventory.InventoryItem.trans_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 63: inventory.InventoryItem.prdn_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 64: inventory.InventoryItem.misc_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 65: inventory.InventoryItem.surch_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 66: inventory.InventoryItem.total_value_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 67: inventory.InventoryItem.matl_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 68: inventory.InventoryItem.trans_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 69: inventory.InventoryItem.prdn_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 70: inventory.InventoryItem.misc_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 71: inventory.InventoryItem.surch_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 72: inventory.InventoryItem.total_value_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 73: inventory.InventoryItem.matl_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 74: inventory.InventoryItem.trans_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 75: inventory.InventoryItem.prdn_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 76: inventory.InventoryItem.misc_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 77: inventory.InventoryItem.surch_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 78: inventory.InventoryItem.total_value_avl_base:type_name -> inventory.DecimalValue
+	4,  // 79: inventory.InventoryItem.matl_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 80: inventory.InventoryItem.trans_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 81: inventory.InventoryItem.prdn_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 82: inventory.InventoryItem.misc_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 83: inventory.InventoryItem.surch_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 84: inventory.InventoryItem.total_value_avl_display:type_name -> inventory.DecimalValue
+	4,  // 85: inventory.InventoryItem.po_pcs_balance:type_name -> inventory.DecimalValue
+	4,  // 86: inventory.InventoryItem.po_qty_ordered:type_name -> inventory.DecimalValue
+	4,  // 87: inventory.InventoryItem.po_qty_allocated:type_name -> inventory.DecimalValue
+	4,  // 88: inventory.InventoryItem.po_qty_delivered:type_name -> inventory.DecimalValue
+	4,  // 89: inventory.InventoryItem.po_qty_balance:type_name -> inventory.DecimalValue
+	4,  // 90: inventory.InventoryItem.po_wgt_ordered_base:type_name -> inventory.DecimalValue
+	4,  // 91: inventory.InventoryItem.po_wgt_ordered_display:type_name -> inventory.DecimalValue
+	4,  // 92: inventory.InventoryItem.po_wgt_alloc_base:type_name -> inventory.DecimalValue
+	4,  // 93: inventory.InventoryItem.po_wgt_alloc_display:type_name -> inventory.DecimalValue
+	4,  // 94: inventory.InventoryItem.po_wgt_delivered_base:type_name -> inventory.DecimalValue
+	4,  // 95: inventory.InventoryItem.po_wgt_delivered_display:type_name -> inventory.DecimalValue
+	4,  // 96: inventory.InventoryItem.po_wgt_balance_base:type_name -> inventory.DecimalValue
+	0,  // 97: inventory.InventoryService.GetInventory:input_type -> inventory.InventoryRequest
+	2,  // 98: inventory.InventoryService.GetInventory:output_type -> inventory.InventoryResult
+	98, // [98:99] is the sub-list for method output_type
+	97, // [97:98] is the sub-list for method input_type
+	97, // [97:97] is the sub-list for extension type_name
+	97, // [97:97] is the sub-list for extension extendee
+	0,  // [0:97] is the sub-list for field type_name
 }
 
 func init() { file_inventoryRequest_proto_init() }
