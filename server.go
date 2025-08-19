@@ -67,48 +67,5 @@ func main() {
 		log.Fatalf("Failed to serve: %v", err)
 	}	
 }
-	// // Here you would typically fetch the inventory data based on the request
-	// items := []*pb.InventoryItem{
-	// 	{		
-	// 		Coid:            "coid1",
-	// 		ExRateSummary:   "Exchange Rate Summary 1",
-	// 		Branch:          "Branch 1",	
-	// 		StkItemId:       101,
-	// 		ProductCode:     "P001",
-	// 		ProductCategory: "Category 1",
-	// 		ProductSize:     "Large",	
-	// 		ProductCondition: "New",
-	// 		Quantity: &pb.DecimalValue{
-	// 			Units: 10,
-	// 			Nanos: 0,
-	// 		},
-	// 		UnitPrice: &pb.DecimalValue{
-	// 			Units: 100,
-	// 			Nanos: 0,
-	// 		},
-	// 		TotalValue: &pb.DecimalValue{
-	// 			Units: 1000,
-	// 			Nanos: 0,
-	// 		},
-	// 		InvoiceDate: &pb.Date{
-	// 			Year:  2023,
-	// 			Month: 10,
-	// 			Day:   1,
-	// 		},
-	// 		FiscalPeriod: &pb.Date{
-	// 			Year:  2023,
-	// 			Month: 1,
-	// 			Day:   1,
-	// 		},
-	// 		StockStatus: "In Stock",
-	// 		StockStatusDate: &pb.Date{
-	// 			Year:  2023,
-	// 			Month: 10,
-	// 			Day:   1,
-	// 		},
-	// 		StockStatusComment: "Available for sale",
-	// 	}
-	// }
-
-	// return &pb.InventoryResult{Items: items}, nil
+	
 	
