@@ -1,0 +1,224 @@
+
+syntax = "proto3";
+
+package inventory;
+
+option go_package = "github.com/howcoWeb/grpServiceUsingGo/protos.inventory";
+
+//import "google/protobuf/timestamp.proto";
+//import "google/protobuf/empty.proto";
+//import "google/protobuf/wrappers.proto"; // For nullable types if you had them
+
+
+
+service InventoryService {
+  rpc GetInventory(InventoryRequest) returns (InventoryResult) {}
+	//option (google.api.http) = {
+	//  get: "/v1/inventory";
+//	}
+};
+
+
+message InventoryRequest {
+  repeated string coids = 1;
+  repeated WarehouseListValue warehouses = 2;
+  optional Date receivedDateMin = 3;
+  optional Date receivedDateMax = 4;
+  string displayCurrency = 7;
+  string displayWeightUOM = 8;
+  // Add other fields as needed
+  // For example, you might want to add filters for product categories, sizes, etc.
+  // optional string productCategory = 5;
+  // optional string productSize = 6;
+}
+
+message WarehouseListValue {
+  string coid = 1;
+  int32 warehouseId = 2;
+}
+
+message InventoryResult {
+  repeated InventoryItem items = 1;
+}
+
+message Date {
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+}
+
+message DecimalValue {
+  int64 units = 1;   // Whole units part of the amount
+  sfixed32 nanos = 2; // Nano units of the amount (10^-9). Must be same sign as units
+}
+
+message InventoryItem {
+    optional string coid = 1;
+    optional string ex_rate_summary = 2;
+    optional string branch = 3;
+    optional int32 stk_item_id = 4;
+    optional string product_code = 5;
+    optional string product_category = 6;
+    optional string product_size = 7;
+    optional string product_condition = 8;
+    optional string product_grade = 9;
+    optional string product_spec = 10;
+    optional DecimalValue outside_diameter = 11;
+    optional DecimalValue inside_diameter = 12;
+    optional DecimalValue theo_wgt = 13;
+    optional DecimalValue theo_wgt_per_foot = 14;
+    optional string mill = 15;
+    optional string country_of_matl_origin = 16;
+    optional string heat = 17;
+    optional string whs_code = 18;
+    optional string whs_name = 19;
+    optional string whs_bu = 20;
+    optional string bu_country = 21;
+    optional string parent_whs = 22;
+    optional string master_whs = 23;
+    optional string tag = 24;
+    optional string parent_tag = 25;
+    optional string master_tag = 26;
+    optional string stk_hold_code = 27;
+    optional string stk_hold_reason = 28;
+    optional string stk_hold_user = 29;
+    optional string stk_hold_desc = 30;
+    optional Date stk_hold_date = 31;
+    optional string customer_number = 32;
+    optional string customer_name = 33;
+    optional string part_number = 34;
+    optional string stk_location = 35;
+    optional string stk_remarks = 36;
+    optional string reject_reason = 37;
+    optional string reject_desc = 38;
+    optional string transient_type = 39;
+    optional string transient_ref = 40;
+    optional string stk_ownership = 41;
+    optional string for_customer_number = 42;
+    optional string for_customer_name = 43;
+    optional string stk_status = 44;
+    optional string product_status = 45;
+    optional string test_spec1 = 46;
+    optional int32 po_number = 47;
+    optional int32 po_item = 48;
+    optional string product_desc = 49;
+    optional string product_size_desc = 50;
+    optional string metal_type = 51;
+    optional string metal_type2 = 52;
+    optional string created_ref_prefix = 53;
+    optional int32 created_ref_no = 54;
+    optional DecimalValue created_ref_item = 55;
+    optional string vendor_no = 56;
+    optional string vendor_name = 57;
+    optional string po_category = 58;
+    optional string po_category_desc = 59;
+    optional string po_type = 60;
+    optional string po_type_desc = 61;
+    optional string whs_type = 62;
+    optional string whs_type_desc = 63;
+    optional string supplier_ref = 64;
+    optional string product_controls_code = 65;
+    optional string product_controls_desc = 66;
+    optional string batch = 67;
+    optional string cus_spec = 68;
+    optional string treatment_number = 69;
+    optional string other_number = 70;
+    optional string spec_condition = 71;
+    optional string abc = 72;
+    optional string mill_heat_lot_no = 73;
+    optional string strat_rank = 74;
+    optional string product_super_item = 75;
+    optional DecimalValue length = 76;
+    optional DecimalValue length_oh = 77;
+    optional DecimalValue length_alloc = 78;
+    optional DecimalValue length_avl = 79;
+    optional DecimalValue wgt_oh_base = 80;
+    optional DecimalValue wgt_alloc_base = 81;
+    optional DecimalValue wgt_avl_base = 82;
+    optional DecimalValue wgt_oh_display = 83;
+    optional DecimalValue wgt_alloc_display = 84;
+    optional DecimalValue wgt_avl_display = 85;
+    optional int32 pcs_oh = 86;
+    optional int32 pcs_alloc = 87;
+    optional int32 pcs_avl = 88;
+    optional DecimalValue qty_oh = 89;
+    optional DecimalValue qty_alloc = 90;
+    optional DecimalValue qty_avl = 91;
+    optional DecimalValue unit_value_base = 92;
+    optional DecimalValue unit_value_display = 93;
+    optional DecimalValue orig_matl_cost_base = 94;
+    optional DecimalValue orig_prdn_cost_base = 95;
+    optional DecimalValue orig_frgt_cost_base = 96;
+    optional DecimalValue orig_misc_cost_base = 97;
+    optional DecimalValue orig_surch_cost_base = 98;
+    optional DecimalValue orig_total_cost_oh_base = 99;
+    optional DecimalValue orig_matl_cost_display = 100;
+    optional DecimalValue orig_prdn_cost_display = 101;
+    optional DecimalValue orig_frgt_cost_display = 102;
+    optional DecimalValue orig_misc_cost_display = 103;
+    optional DecimalValue orig_surch_cost_display = 104;
+    optional DecimalValue orig_total_cost_display = 105;
+    optional DecimalValue matl_cost_per_wgt_base = 106;
+    optional DecimalValue prdn_cost_per_wgt_base = 107;
+    optional DecimalValue trans_cost_per_wgt_base = 108;
+    optional DecimalValue misc_cost_per_wgt_base = 109;
+    optional DecimalValue surch_cost_per_wgt_base = 110;
+    optional DecimalValue total_cost_per_wgt_base = 111;
+    optional DecimalValue matl_cost_per_wgt_display = 112;
+    optional DecimalValue prdn_cost_per_wgt_display = 113;
+    optional DecimalValue trans_cost_per_wgt_display = 114;
+    optional DecimalValue misc_cost_per_wgt_display = 115;
+    optional DecimalValue surch_cost_per_wgt_display = 116;
+    optional DecimalValue total_cost_per_wgt_display = 117;
+    optional DecimalValue matl_value_oh_base = 118;
+    optional DecimalValue trans_value_oh_base = 119;
+    optional DecimalValue prdn_value_oh_base = 120;
+    optional DecimalValue misc_value_oh_base = 121;
+    optional DecimalValue surch_value_oh_base = 122;
+    optional DecimalValue total_value_oh_base = 123;
+    optional DecimalValue matl_value_oh_display = 124;
+    optional DecimalValue trans_value_oh_display = 125;
+    optional DecimalValue prdn_value_oh_display = 126;
+    optional DecimalValue misc_value_oh_display = 127;
+    optional DecimalValue surch_value_oh_display = 128;
+    optional DecimalValue total_value_oh_display = 129;
+    optional DecimalValue matl_value_alloc_base = 130;
+    optional DecimalValue trans_value_alloc_base = 131;
+    optional DecimalValue prdn_value_alloc_base = 132;
+    optional DecimalValue misc_value_alloc_base = 133;
+    optional DecimalValue surch_value_alloc_base = 134;
+    optional DecimalValue total_value_alloc_base = 135;
+    optional DecimalValue matl_value_alloc_display = 136;
+    optional DecimalValue trans_value_alloc_display = 137;
+    optional DecimalValue prdn_value_alloc_display = 138;
+    optional DecimalValue misc_value_alloc_display = 139;
+    optional DecimalValue surch_value_alloc_display = 140;
+    optional DecimalValue total_value_alloc_display = 141;
+    optional DecimalValue matl_value_avl_base = 142;
+    optional DecimalValue trans_value_avl_base = 143;
+    optional DecimalValue prdn_value_avl_base = 144;
+    optional DecimalValue misc_value_avl_base = 145;
+    optional DecimalValue surch_value_avl_base = 146;
+    optional DecimalValue total_value_avl_base = 147;
+    optional DecimalValue matl_value_avl_display = 148;
+    optional DecimalValue trans_value_avl_display = 149;
+    optional DecimalValue prdn_value_avl_display = 150;
+    optional DecimalValue misc_value_avl_display = 151;
+    optional DecimalValue surch_value_avl_display = 152;
+    optional DecimalValue total_value_avl_display = 153;
+    optional int32 po_pcs_ordered = 154;
+    optional int32 po_pcs_alloc = 155;
+    optional int32 po_pcs_delivered = 156;
+    optional DecimalValue po_pcs_balance = 157;
+    optional DecimalValue po_qty_ordered = 158;
+    optional DecimalValue po_qty_allocated = 159;
+    optional DecimalValue po_qty_delivered = 160;
+    optional DecimalValue po_qty_balance = 161;
+    optional DecimalValue po_wgt_ordered_base = 162;
+    optional DecimalValue po_wgt_ordered_display = 163;
+    optional DecimalValue po_wgt_alloc_base = 164;
+    optional DecimalValue po_wgt_alloc_display = 165;
+    optional DecimalValue po_wgt_delivered_base = 166;
+    optional DecimalValue po_wgt_delivered_display = 167;
+    optional DecimalValue po_wgt_balance_base = 168;
+}
